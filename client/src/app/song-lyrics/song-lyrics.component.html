@@ -1,0 +1,20 @@
+<div class="min-h-screen bg-[#0a0a0a] text-white pt-20">
+  <app-header></app-header>
+  
+  <div class="flex items-center justify-center min-h-[calc(100vh-5rem)] px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-2xl">
+      <div *ngIf="song" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 shadow-xl">
+        <h1 class="text-3xl font-bold text-white mb-6 text-center">{{ song.title }}</h1>
+        <div class="lyrics space-y-4">
+          <div *ngFor="let segment of segments" class="flex items-center gap-2">
+            <div *ngIf="segment.chord" class="font-bold text-[#4FE2D2]">{{ segment.chord }}</div>
+            <div *ngIf="segment.text" class="text-white">{{ segment.text }}</div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!song" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 shadow-xl text-center">
+        <p class="text-slate-400">Loading...</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+
+.song-details {
+    padding: 20px;
+  
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  
+    .lyrics {
+      font-size: 18px;
+      line-height: 1.5;
+  
+      p {
+        margin-bottom: 10px;
+      }
+  
+      .chord {
+        font-weight: bold;
+        /* Adjust other styles as needed */
+      }
+    }
+  }
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Adjust as needed */
+    font-size: 18px;
+    color: #666;
+  }
+  

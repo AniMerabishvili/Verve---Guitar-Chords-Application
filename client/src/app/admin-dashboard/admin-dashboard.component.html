@@ -1,0 +1,194 @@
+<div class="min-h-screen bg-gradient-to-br from-[#0F0F0F] to-[#1A1A1A] pt-20">
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-white mb-2">Admin Dashboard</h1>
+      <p class="text-gray-400">Review and manage song submissions</p>
+    </div>
+
+    <!-- Debug Info (remove this after testing) -->
+    <!-- <div class="bg-gray-800 border border-gray-600 rounded-lg p-4 mb-6">
+      <h3 class="text-white font-semibold mb-2">Debug Info:</h3>
+      <p class="text-gray-300">Total pending songs: {{ pendingSongs.length }}</p>
+      <p class="text-gray-300">Loading: {{ loading }}</p>
+      <div *ngIf="pendingSongs.length > 0" class="mt-2">
+        <p class="text-gray-300">Song IDs:</p>
+        <ul class="text-gray-400 text-sm">
+          <li *ngFor="let song of pendingSongs">{{ song._id }} - {{ song.title }} (Status: {{ song.status }})</li>
+        </ul>
+      </div>
+    </div> -->
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-[#111111] border border-[#222222] rounded-lg p-6">
+        <div class="flex items-center">
+          <div class="p-3 bg-yellow-500/10 rounded-lg">
+            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-400">Pending Reviews</p>
+            <p class="text-2xl font-bold text-white">{{ pendingSongs.length }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[#111111] border border-[#222222] rounded-lg p-6">
+        <div class="flex items-center">
+          <div class="p-3 bg-green-500/10 rounded-lg">
+            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-400">Approved Today</p>
+            <p class="text-2xl font-bold text-white">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[#111111] border border-[#222222] rounded-lg p-6">
+        <div class="flex items-center">
+          <div class="p-3 bg-red-500/10 rounded-lg">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-400">Rejected Today</p>
+            <p class="text-2xl font-bold text-white">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Songs List -->
+    <div class="bg-[#111111] border border-[#222222] rounded-lg overflow-hidden">
+      <div class="px-6 py-4 border-b border-[#222222]">
+        <h2 class="text-xl font-semibold text-white">Pending Songs (Status Code: 0)</h2>
+      </div>
+
+      <div *ngIf="loading" class="p-8 text-center">
+        <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-[#4FE2D2] transition ease-in-out duration-150 cursor-not-allowed">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Loading...
+        </div>
+      </div>
+
+      <div *ngIf="!loading && pendingSongs.length === 0" class="p-8 text-center">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-400">No pending songs</h3>
+        <p class="mt-1 text-sm text-gray-500">All songs have been reviewed.</p>
+      </div>
+
+      <div *ngIf="!loading && pendingSongs.length > 0" class="divide-y divide-[#222222]">
+        <div *ngFor="let song of pendingSongs; trackBy: trackBySongId" class="p-6 hover:bg-[#1A1A1A] transition-colors duration-200">
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <div class="flex items-center space-x-3">
+                <h3 class="text-lg font-medium text-white">{{ song.title }}</h3>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                      [class]="getStatusClass(song.status || 0)">
+                  {{ getStatusLabel(song.status || 0) }} ({{ song.status || 0 }})
+                </span>
+              </div>
+              <div class="mt-1 flex items-center space-x-4 text-sm text-gray-400">
+                <span>Uploaded by: {{ song.uploadedByUsername || 'Unknown' }}</span>
+                <span>ID: {{ song._id }}</span>
+                <span>Status Code: {{ song.status }}</span>
+              </div>
+              <p class="mt-2 text-sm text-gray-500 line-clamp-2">{{ song.lyrics?.substring(0, 150) }}...</p>
+              <div class="mt-2 text-xs text-gray-600">
+                <span>Created: {{ formatDate(song.createdAt, 'short') }}</span>
+                <span class="ml-4">Updated: {{ formatDate(song.updatedAt, 'short') }}</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-3">
+              <button 
+                (click)="viewSong(song)"
+                class="inline-flex items-center px-3 py-2 border border-[#333333] rounded-md text-sm font-medium text-gray-300 bg-[#1A1A1A] hover:bg-[#222222] hover:text-white transition-colors duration-200"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                View
+              </button>
+              <button 
+                (click)="approveSong(song._id)"
+                class="inline-flex items-center px-3 py-2 border border-green-600 rounded-md text-sm font-medium text-green-400 bg-green-900/20 hover:bg-green-900/40 hover:text-green-300 transition-colors duration-200"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Approve
+              </button>
+              <button 
+                (click)="rejectSong(song._id)"
+                class="inline-flex items-center px-3 py-2 border border-red-600 rounded-md text-sm font-medium text-red-400 bg-red-900/20 hover:bg-red-900/40 hover:text-red-300 transition-colors duration-200"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Reject
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Song Detail Modal -->
+    <div *ngIf="showSongModal && selectedSong" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-[#111111] border border-[#222222] rounded-lg max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+        <div class="px-6 py-4 border-b border-[#222222] flex items-center justify-between">
+          <h3 class="text-xl font-semibold text-white">{{ selectedSong?.title }}</h3>
+          <button (click)="closeModal()" class="text-gray-400 hover:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="p-6">
+          <div class="mb-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                  [class]="getStatusClass(selectedSong?.status || 0)">
+              {{ getStatusLabel(selectedSong?.status || 0) }} (Status Code: {{ selectedSong?.status }})
+            </span>
+          </div>
+          <div class="mb-4 text-sm text-gray-400">
+            <p>Uploaded by: {{ selectedSong?.uploadedByUsername || 'Unknown' }}</p>
+            <p>Song ID: {{ selectedSong?._id }}</p>
+            <p>Created: {{ formatDate(selectedSong?.createdAt, 'full') }}</p>
+            <p>Updated: {{ formatDate(selectedSong?.updatedAt, 'full') }}</p>
+          </div>
+          <div class="mb-6">
+            <h4 class="text-white font-medium mb-2">Lyrics:</h4>
+            <div class="bg-[#0a0a0a] border border-[#333333] rounded-lg p-4 text-gray-300 whitespace-pre-wrap">{{ selectedSong?.lyrics }}</div>
+          </div>
+          <div class="flex space-x-3">
+            <button 
+              (click)="approveSong(selectedSong?._id || '')"
+              class="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            >
+              Approve Song
+            </button>
+            <button 
+              (click)="rejectSong(selectedSong?._id || '')"
+              class="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+            >
+              Reject Song
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

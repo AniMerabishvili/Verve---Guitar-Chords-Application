@@ -1,0 +1,179 @@
+{
+  "timestamp": "2025-08-05T19:08:01.237Z",
+  "chords": [
+    {
+      "_id": "689255798ad5a0b7bcb1c3ae",
+      "chordName": "C",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.718Z",
+      "updatedAt": "2025-08-05T19:03:21.718Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3af",
+      "chordName": "D",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.718Z",
+      "updatedAt": "2025-08-05T19:03:21.718Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b0",
+      "chordName": "E",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.719Z",
+      "updatedAt": "2025-08-05T19:03:21.719Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b1",
+      "chordName": "F",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.719Z",
+      "updatedAt": "2025-08-05T19:03:21.719Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b2",
+      "chordName": "G",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.719Z",
+      "updatedAt": "2025-08-05T19:03:21.719Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b3",
+      "chordName": "A",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.719Z",
+      "updatedAt": "2025-08-05T19:03:21.719Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b4",
+      "chordName": "B",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.719Z",
+      "updatedAt": "2025-08-05T19:03:21.719Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b5",
+      "chordName": "Cm",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.720Z",
+      "updatedAt": "2025-08-05T19:03:21.720Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b6",
+      "chordName": "Dm",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.720Z",
+      "updatedAt": "2025-08-05T19:03:21.720Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b7",
+      "chordName": "Em",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.720Z",
+      "updatedAt": "2025-08-05T19:03:21.720Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b8",
+      "chordName": "Fm",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.721Z",
+      "updatedAt": "2025-08-05T19:03:21.721Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3b9",
+      "chordName": "Gm",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.721Z",
+      "updatedAt": "2025-08-05T19:03:21.721Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3ba",
+      "chordName": "Am",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.721Z",
+      "updatedAt": "2025-08-05T19:03:21.721Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3bb",
+      "chordName": "Bm",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.721Z",
+      "updatedAt": "2025-08-05T19:03:21.721Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3bc",
+      "chordName": "C7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.721Z",
+      "updatedAt": "2025-08-05T19:03:21.721Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3bd",
+      "chordName": "D7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.721Z",
+      "updatedAt": "2025-08-05T19:03:21.721Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3be",
+      "chordName": "E7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.722Z",
+      "updatedAt": "2025-08-05T19:03:21.722Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3bf",
+      "chordName": "F7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.722Z",
+      "updatedAt": "2025-08-05T19:03:21.722Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3c0",
+      "chordName": "G7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.722Z",
+      "updatedAt": "2025-08-05T19:03:21.722Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3c1",
+      "chordName": "A7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.722Z",
+      "updatedAt": "2025-08-05T19:03:21.722Z"
+    },
+    {
+      "_id": "689255798ad5a0b7bcb1c3c2",
+      "chordName": "B7",
+      "__v": 0,
+      "createdAt": "2025-08-05T19:03:21.722Z",
+      "updatedAt": "2025-08-05T19:03:21.722Z"
+    }
+  ],
+  "songs": [],
+  "users": [
+    {
+      "_id": "689255fdcbca3330664a3002",
+      "firstName": "Ani",
+      "lastName": "Merabishvili",
+      "userName": "Animagaria",
+      "email": "ani@gmail.com",
+      "password": "$2b$10$rxCJBnTHalOFlveyUm3RZOIPdVtFo0gXb8wEvACKuQNs3PKc9RHCK",
+      "role": "customer",
+      "createdAt": "2025-08-05T19:05:33.038Z",
+      "updatedAt": "2025-08-05T19:05:33.038Z",
+      "__v": 0
+    },
+    {
+      "_id": "6892560ccbca3330664a3006",
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "userName": "Admin",
+      "email": "admin@gmail.com",
+      "password": "$2b$10$cUxZY3NG6eYswiHCuuaoRuJrYGWyRWaSDXXCd6qjelLNLKBjyOms.",
+      "role": "admin",
+      "createdAt": "2025-08-05T19:05:48.200Z",
+      "updatedAt": "2025-08-05T19:05:48.200Z",
+      "__v": 0
+    }
+  ]
+}

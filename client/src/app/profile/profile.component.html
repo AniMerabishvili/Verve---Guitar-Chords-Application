@@ -1,0 +1,227 @@
+<div class="min-h-screen bg-[#0a0a0a] text-white pt-32">
+  <div class="flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-4xl">
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4FE2D2]"></div>
+      </div>
+
+      <!-- Profile Content -->
+      <div *ngIf="!isLoading && user" class="space-y-6">
+        <!-- Header Section -->
+        <div class="bg-[#111111] border border-[#222222] rounded-2xl p-8 shadow-2xl">
+          <div class="flex items-center justify-between mb-6">
+            <button 
+              (click)="goBack()" 
+              class="flex items-center text-gray-400 hover:text-[#4FE2D2] transition-colors duration-200"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Back
+            </button>
+            <h1 class="text-2xl font-bold text-white">Profile</h1>
+            <div class="w-10"></div> <!-- Spacer for centering -->
+          </div>
+          
+          <!-- Profile Avatar and Info -->
+          <div class="flex flex-col items-center text-center mb-8">
+            <div class="w-24 h-24 bg-gradient-to-br from-[#4FE2D2] to-[#6FE8DB] rounded-full flex items-center justify-center mb-4 shadow-lg">
+              <span class="text-4xl font-bold text-[#0F0F0F]">
+                {{ user?.firstName?.charAt(0) || user?.userName?.charAt(0) || 'U' }}
+              </span>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-2">{{ user?.userName }}</h2>
+            <p class="text-[#4FE2D2] font-medium">{{ user?.email }}</p>
+            <div class="mt-2 px-4 py-1 bg-[#4FE2D2]/10 border border-[#4FE2D2]/20 rounded-full">
+              <span class="text-[#4FE2D2] text-sm font-medium">{{ user?.role || 'User' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="bg-[#111111] border border-[#222222] rounded-2xl p-8 shadow-2xl">
+          <h3 class="text-xl font-semibold text-white mb-6">Account Information</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+              <div class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#333333] rounded-lg text-white">
+                {{ user?.firstName }}
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+              <div class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#333333] rounded-lg text-white">
+                {{ user?.lastName }}
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+              <div class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#333333] rounded-lg text-white">
+                {{ user?.userName }}
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+              <div class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#333333] rounded-lg text-white">
+                {{ user?.email }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Your Songs Section -->
+        <div class="bg-[#111111] border border-[#222222] rounded-2xl p-8 shadow-2xl">
+          <h3 class="text-xl font-semibold text-white mb-6">Your Songs</h3>
+          
+          <!-- Loading State for Songs -->
+          <div *ngIf="songsLoading" class="flex justify-center items-center py-8">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#4FE2D2]"></div>
+          </div>
+
+          <!-- Songs Content -->
+          <div *ngIf="!songsLoading" class="space-y-6">
+            <!-- Pending Songs -->
+            <div *ngIf="getPendingSongs().length > 0">
+              <h4 class="text-lg font-medium text-yellow-400 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Pending Review ({{ getPendingSongs().length }})
+              </h4>
+              <div class="grid gap-4">
+                <div *ngFor="let song of getPendingSongs()" class="bg-[#0a0a0a] border border-[#333333] rounded-lg p-4">
+                  <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                      <h5 class="text-white font-medium">{{ song.title }}</h5>
+                      <p class="text-gray-400 text-sm mt-1">Uploaded on {{ song.createdAt | date:'mediumDate' }}</p>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 border border-yellow-200">
+                      Pending
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Approved Songs -->
+            <div *ngIf="getApprovedSongs().length > 0">
+              <h4 class="text-lg font-medium text-green-400 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Approved ({{ getApprovedSongs().length }})
+              </h4>
+              <div class="grid gap-4">
+                <div *ngFor="let song of getApprovedSongs()" class="bg-[#0a0a0a] border border-[#333333] rounded-lg p-4">
+                  <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                      <h5 class="text-white font-medium">{{ song.title }}</h5>
+                      <p class="text-gray-400 text-sm mt-1">Approved on {{ song.updatedAt | date:'mediumDate' }}</p>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 border border-green-200">
+                      Approved
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rejected Songs -->
+            <div *ngIf="getRejectedSongs().length > 0">
+              <h4 class="text-lg font-medium text-red-400 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Rejected ({{ getRejectedSongs().length }})
+              </h4>
+              <div class="grid gap-4">
+                <div *ngFor="let song of getRejectedSongs()" class="bg-[#0a0a0a] border border-[#333333] rounded-lg p-4">
+                  <div class="flex items-center justify-between">
+                    <div class="flex-1">
+                      <h5 class="text-white font-medium">{{ song.title }}</h5>
+                      <p class="text-gray-400 text-sm mt-1">Rejected on {{ song.updatedAt | date:'mediumDate' }}</p>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 border border-red-200">
+                      Rejected
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Songs Message -->
+            <div *ngIf="userSongs.length === 0" class="text-center py-8">
+              <div class="w-16 h-16 bg-[#0a0a0a] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#333333]">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                </svg>
+              </div>
+              <h4 class="text-lg font-medium text-white mb-2">No Songs Yet</h4>
+              <p class="text-gray-400 mb-4">You haven't uploaded any songs yet.</p>
+              <button 
+                (click)="router.navigate(['/song-upload'])" 
+                class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#4FE2D2] to-[#6FE8DB] text-[#0a0a0a] font-medium rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Upload Your First Song
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions Section -->
+        <div class="bg-[#111111] border border-[#222222] rounded-2xl p-8 shadow-2xl">
+          <h3 class="text-xl font-semibold text-white mb-6">Account Actions</h3>
+          <div class="space-y-4">
+            <button 
+              (click)="router.navigate(['/song-upload'])" 
+              class="w-full bg-gradient-to-r from-[#4FE2D2] to-[#6FE8DB] text-[#0a0a0a] font-semibold py-3 px-6 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+              Upload New Song
+            </button>
+            <button 
+              class="w-full bg-gradient-to-r from-[#4FE2D2] to-[#6FE8DB] text-[#0a0a0a] font-semibold py-3 px-6 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              Edit Profile
+            </button>
+            <button 
+              (click)="logout()" 
+              class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              Log Out
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="!isLoading && !user" class="text-center py-20">
+        <div class="w-24 h-24 bg-[#111111] rounded-full flex items-center justify-center mx-auto mb-6 border border-[#222222]">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-2">Access Denied</h3>
+        <p class="text-gray-400 mb-6">You need to be logged in to view your profile.</p>
+        <button 
+          (click)="navigateToSignIn()" 
+          class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#4FE2D2] to-[#6FE8DB] text-[#0a0a0a] font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+        >
+          Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
