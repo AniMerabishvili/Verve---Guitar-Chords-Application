@@ -1,5 +1,4 @@
-const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcryptjs');
 module.exports = {
     name: '001_initial_schema',
     version: 1,

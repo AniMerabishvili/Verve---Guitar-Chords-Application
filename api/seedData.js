@@ -5,7 +5,7 @@ require('dotenv').config();
 const Chord = require('./models/chords');
 const Song = require('./models/song');
 const User = require('./models/user');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Sample chord data
 const sampleChords = [

@@ -16,7 +16,7 @@ module.exports = {
         
         if (!adminUser) {
             console.log('⚠️ No admin user found, creating one...');
-            const bcrypt = require('bcrypt');
+            const bcrypt = require('bcryptjs');
             const newAdmin = new User({
                 firstName: "Admin",
                 lastName: "User",

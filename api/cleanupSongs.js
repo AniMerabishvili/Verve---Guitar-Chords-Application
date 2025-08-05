@@ -14,7 +14,7 @@ async function cleanupSongs() {
         const adminUser = await User.findOne({ role: 'admin' });
         if (!adminUser) {
             console.log('No admin user found. Creating one...');
-            const bcrypt = require('bcrypt');
+            const bcrypt = require('bcryptjs');
             const newAdmin = new User({
                 firstName: "Admin",
                 lastName: "User",

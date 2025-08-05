@@ -93,7 +93,7 @@ class MigrationRunner {
 
 module.exports = MigrationRunner;
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     name: '001_initial_schema',
@@ -111,7 +111,7 @@ module.exports = {
     }
 };
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     name: '002_seed_initial_data',
