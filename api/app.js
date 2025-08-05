@@ -16,8 +16,12 @@ var chordRouter = require('./routes/chords');
 var app = express();
 
 // Enable CORS with specific configuration
+// Enable CORS with specific configuration
 app.use(cors({
-  origin: 'https://verve-tau.vercel.app', // Allow requests from the Angular application
+  origin: [
+    'https://verve-tau.vercel.app', // Production frontend
+    'http://localhost:4200'        // Development frontend
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
 }));
