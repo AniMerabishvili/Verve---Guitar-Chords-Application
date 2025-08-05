@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 
+// DEPLOYMENT VERIFICATION - This should appear in logs
+console.log('🚀🚀🚀 UPDATED APP.JS LOADED - TIMESTAMP:', new Date().toISOString());
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var userRouter = require('./routes/user');
@@ -16,15 +19,18 @@ var chordRouter = require('./routes/chords');
 var app = express();
 
 // Enable CORS with specific configuration
-// Enable CORS with specific configuration
-app.use(cors({
+console.log('🚀 Setting up CORS configuration...');
+const corsOptions = {
   origin: [
     'https://verve-tau.vercel.app', // Production frontend
     'http://localhost:4200'        // Development frontend
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
-}));
+};
+
+console.log('🌐 CORS allowed origins:', corsOptions.origin);
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
