@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Chords } from '../models/chords';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChordsService {
 
-  private url='http://localhost:3000/chords/all';
-  private url1='http://localhost:3000/song/add';
+  private url = `${environment.apiUrl}/chords/all`;
+  private url1 = `${environment.apiUrl}/song/add`;
 
   constructor(private http:HttpClient){ }
 
