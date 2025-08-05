@@ -67,8 +67,8 @@ const sampleUsers = [
         firstName: "John",
         lastName: "Doe",
         userName: "johndoe",
-        email: "john@example.com",
-        password: "password123",
+        email: "admin@gmail.com",
+        password: "admin1",
         role: "admin"
     },
     {

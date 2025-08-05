@@ -34,6 +34,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/sign-in']);

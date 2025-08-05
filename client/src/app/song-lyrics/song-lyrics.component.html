@@ -2,18 +2,60 @@
   <app-header></app-header>
   
   <div class="flex items-center justify-center min-h-[calc(100vh-5rem)] px-4 sm:px-6 lg:px-8">
-    <div class="w-full max-w-2xl">
-      <div *ngIf="song" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 shadow-xl">
-        <h1 class="text-3xl font-bold text-white mb-6 text-center">{{ song.title }}</h1>
-        <div class="lyrics space-y-4">
-          <div *ngFor="let segment of segments" class="flex items-center gap-2">
-            <div *ngIf="segment.chord" class="font-bold text-[#4FE2D2]">{{ segment.chord }}</div>
-            <div *ngIf="segment.text" class="text-white">{{ segment.text }}</div>
+    <div class="w-full max-w-4xl">
+      <div *ngIf="song" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 sm:p-8 shadow-xl">
+        <h1 class="text-2xl sm:text-3xl font-bold text-white mb-8 text-center break-words">{{ song.title }}</h1>
+        
+        <!-- Display chord/lyrics content -->
+        <div class="lyrics-container max-w-none overflow-x-auto">
+          <!-- Show message if no chords found -->
+          <div *ngIf="segments.length === 0" class="text-center py-8">
+            <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
+              <div class="flex items-center justify-center mb-2">
+                <svg class="w-5 h-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.732 15.5c-.77.833.192 2.5 1.732 2.5z"/>
+                </svg>
+                <span class="text-yellow-400 font-semibold">No Chords Available</span>
+              </div>
+              <p class="text-gray-300 text-sm">This song contains only lyrics without chord notations.</p>
+            </div>
+            <div class="text-left bg-[#111111] rounded-lg p-6 border border-[#333333]">
+              <div class="whitespace-pre-line text-gray-200 leading-relaxed text-lg">{{ song.lyrics }}</div>
+            </div>
+          </div>
+          
+          <!-- Show formatted lyrics with chords -->
+          <div *ngIf="segments.length > 0" class="bg-[#111111] rounded-lg p-6 border border-[#333333]">
+            <div class="formatted-lyrics font-mono text-base sm:text-lg leading-loose">
+              <div *ngFor="let line of formattedLines" class="mb-6">
+                <!-- Chord line -->
+                <div class="chord-line mb-1 min-h-[1.5rem]" [innerHTML]="line.chordLine"></div>
+                <!-- Lyrics line -->
+                <div class="lyrics-line text-gray-200" [innerHTML]="line.lyricsLine"></div>
+              </div>
+            </div>
           </div>
         </div>
+        
+        <!-- Back button -->
+        <div class="mt-8 text-center">
+          <button 
+            (click)="goBack()"
+            class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#4FE2D2] to-[#6FE8DB] text-[#0a0a0a] font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+          >
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Back to Songs
+          </button>
+        </div>
       </div>
-      <div *ngIf="!song" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 shadow-xl text-center">
-        <p class="text-slate-400">Loading...</p>
+      
+      <div *ngIf="!song" class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 sm:p-8 shadow-xl text-center">
+        <div class="animate-pulse">
+          <div class="w-16 h-16 bg-[#4FE2D2]/20 rounded-full mx-auto mb-4"></div>
+          <p class="text-slate-400">Loading song...</p>
+        </div>
       </div>
     </div>
   </div>

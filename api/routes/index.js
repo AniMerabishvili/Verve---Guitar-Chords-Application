@@ -40,7 +40,7 @@ router.get('/admin/seed-data-2024', async function(req, res, next) {
     ];
 
     const sampleUsers = [
-        { firstName: "John", lastName: "Doe", userName: "johndoe", email: "john@example.com", password: "password123", role: "admin" },
+        { firstName: "Admin", lastName: "Adminashvili", userName: "Admin", email: "admin@gmail.com", password: "password123", role: "admin1" },
         { firstName: "Jane", lastName: "Smith", userName: "janesmith", email: "jane@example.com", password: "password123", role: "customer" }
     ];
 

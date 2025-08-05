@@ -31,3 +31,67 @@
     color: #666;
   }
   
+.lyrics-container {
+  .formatted-lyrics {
+    line-height: 1.8;
+    
+    .chord-line {
+      .chord {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 0.875rem;
+        margin-bottom: 2px;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background-color: rgba(79, 226, 210, 0.2) !important;
+          transform: scale(1.05);
+        }
+      }
+    }
+    
+    .lyrics-line {
+      color: #e5e7eb;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      
+      &:empty {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  .formatted-lyrics {
+    font-size: 0.875rem !important;
+    
+    .chord {
+      font-size: 0.75rem !important;
+    }
+  }
+}
+
+// Print styles for chord charts
+@media print {
+  .lyrics-container {
+    background: white !important;
+    border: none !important;
+    
+    .formatted-lyrics {
+      color: black !important;
+      
+      .chord {
+        color: black !important;
+        background: none !important;
+        border: 1px solid black !important;
+      }
+      
+      .lyrics-line {
+        color: black !important;
+      }
+    }
+  }
+}
+  
