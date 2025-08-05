@@ -100,11 +100,8 @@ async function seedData() {
         const chords = await Chord.insertMany(sampleChords);
         console.log(`Inserted ${chords.length} chords:`, chords.map(c => c.chordName));
 
-        // Insert songs
-        const songs = await Song.insertMany(sampleSongs);
-        console.log(`Inserted ${songs.length} songs`);
-
-        // Hash passwords and insert users
+        // Hash passwords and insert users FIRST
+        console.log('Inserting users...');
         const hashedUsers = await Promise.all(
             sampleUsers.map(async (user) => ({
                 ...user,
@@ -113,6 +110,21 @@ async function seedData() {
         );
         const users = await User.insertMany(hashedUsers);
         console.log(`Inserted ${users.length} users`);
+
+        // Get the admin user to assign as uploader for sample songs
+        const adminUser = users.find(user => user.role === 'admin');
+        
+        // Update sample songs with required fields
+        const songsWithUploader = sampleSongs.map(song => ({
+            ...song,
+            uploadedBy: adminUser._id,
+            uploadedByUsername: adminUser.userName
+        }));
+
+        // Insert songs with uploader info
+        console.log('Inserting songs...');
+        const songs = await Song.insertMany(songsWithUploader);
+        console.log(`Inserted ${songs.length} songs`);
 
         console.log('Seed data inserted successfully!');
         process.exit(0);

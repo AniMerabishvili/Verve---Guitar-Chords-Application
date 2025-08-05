@@ -111,7 +111,6 @@ module.exports = {
     }
 };
 
-const bcrypt = require('bcryptjs');
 
 module.exports = {
     name: '002_seed_initial_data',
